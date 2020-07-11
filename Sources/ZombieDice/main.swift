@@ -7,6 +7,6 @@
 
 import Foundation
 
-var die: RedDie = RedDie()
 
-print(die.roll())
+var game = ZombieDiceEngine()
+game.startGame()
