@@ -9,4 +9,4 @@ import Foundation
 
 
 var game = ZombieDiceEngine()
-game.startGame()
+game.play()

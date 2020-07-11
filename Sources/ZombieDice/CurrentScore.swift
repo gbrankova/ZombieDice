@@ -22,11 +22,16 @@ struct CurrentScore {
     }
     
     func amIShotguned() -> Bool {
-        return shotgunScore == 3
+        return shotgunScore >= 3
     }
     
-    func reset() {
+    mutating func resetScore() {
         brainsScore = 0
         shotgunScore = 0
+    }
+    
+    func print() {
+        Swift.print("--- Current score ---")
+        Swift.print("🧠: \(brainsScore),💥: \(shotgunScore)")
     }
 }

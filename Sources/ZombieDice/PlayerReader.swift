@@ -27,7 +27,7 @@ struct PlayerReader {
         while !playerCountReady {
             print("Please enter the number of players [2-8]: ", terminator: "")
             if let count = readLine() {
-                if !("2"..."8").contains(count) {
+                if (!("2"..."8").contains(count) || count.count != 1) {
                     print("Player number must be an integer between 2 - 8")
                 } else {
                     if let countInt = Int(count) {
