@@ -7,6 +7,5 @@
 
 import Foundation
 
-
 var game = ZombieDiceEngine()
 game.play()

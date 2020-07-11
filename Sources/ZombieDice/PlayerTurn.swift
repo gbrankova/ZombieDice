@@ -33,7 +33,8 @@ struct PlayerTurn {
             printRolledDice()
             
             if (currentScore.amIShotguned()) {
-                print("💥💥💥 YOU ARE SHOTGUNNED! 💥💥💥")
+                currentScore.print()
+                print("\n💥💥💥 YOU ARE SHOTGUNNED! 💥💥💥\n")
                 return false
             } else {
                 var gotAnAnswerFromPlayer = false
@@ -42,9 +43,10 @@ struct PlayerTurn {
                     
                     if let answer = readLine() {
                         if answer == "no" {
+                            currentScore.print()
                             addNewScoreTo(player)
                             if (player.score >= 13) {
-                                print("🏅🏅🏅 \(player.name) is the winner! 🏅🏅🏅")
+                                print("\n🏅🏅🏅 \(player.name) is the winner! 🏅🏅🏅\n")
                                 return true
                             }
                             endOfTurn = true
@@ -91,7 +93,18 @@ struct PlayerTurn {
     }
     
     func printRolledDice() {
-        print("Rolled dice: \(currentDrawnDiceSides.map { $0.rawValue })")
+        print("Rolled dice: ", terminator: "")
+        for index in 0..<currentDrawnDiceSides.count {
+            switch currentDrawnDice[index] {
+            case Die.GreenDie:
+                print("GreenDie/\(currentDrawnDiceSides[index].rawValue)", terminator: " ")
+            case Die.YellowDie:
+                print("YellowDie/\(currentDrawnDiceSides[index].rawValue)", terminator: " ")
+            case Die.RedDie:
+                print("RedDie/\(currentDrawnDiceSides[index].rawValue)", terminator: " ")
+            }
+        }
+        print()
     }
 }
 

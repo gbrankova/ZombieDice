@@ -17,14 +17,16 @@ struct ZombieDiceEngine {
     }
     
     mutating func play() {
-        print("-------- Welcome to ZombieDice --------")
+        print("-------- Welcome to Zombie Dice --------")
         var playerReader = PlayerReader()
         players = playerReader.getPlayers()
         
-        var wantToPlayAgain = false
+        var wantToPlayAgain: Bool
         repeat {
+            wantToPlayAgain = false
+            resetScores()
             startGame()
-            print("Do you want to play again? (yes/no)")
+            print("Do you want to play Zombie Dice again? (yes/no)")
             if let playAgain = readLine(), playAgain == "yes" {
                 wantToPlayAgain = true
             }
@@ -48,7 +50,14 @@ struct ZombieDiceEngine {
         }
     }
     
+    func resetScores() {
+        for player in players {
+            player.resetScore()
+        }
+    }
+    
     func printStatictics() {
+        print("\n\n\n")
         print("--------- Statistics: --------")
         print("==============================")
         for player in players {
@@ -57,6 +66,7 @@ struct ZombieDiceEngine {
         print("==============================")
         print("\(players[whoseTurnIsIt].name) is rolling now!")
         print("==============================")
+        print("\n\n\n")
     }
 }
 

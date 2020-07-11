@@ -13,4 +13,8 @@ class Player {
         self.name = name
         self.score = score
     }
+    
+    func resetScore() {
+        score = 0
+    }
 }
