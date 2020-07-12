@@ -35,6 +35,8 @@ enum Die {
         }
     }
     
+    /* The force unwrap is save in this case because we are sure
+       that "sides" will give us an array with a fixed number of (6) elemets */
     func rollDie() -> DieSide {
         return sides.randomElement()!
     }

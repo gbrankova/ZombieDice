@@ -8,23 +8,28 @@
 import Foundation
 
 struct PlayerTurn {
-    var diePool: DiePool
-    var diceWithStepsOnBoard: [Die]
-
+    var player: Player                    // the player whose turn it is
+    var diePool: DiePool                  // jar with dice
+    var diceWithStepsOnBoard: [Die]       // dice that rolled to steps and we can
+                                          // reroll together with the other dice
+                                          // we draw from the diepool
     var currentScore: CurrentScore
     
-    var currentDrawnDice: [Die]
-    var currentDrawnDiceSides : [DieSide]
+    var currentDrawnDice: [Die]           // the current 3 dice we have in hand
+    var currentDrawnDiceSides : [DieSide] // the die sides we got after rolling
     
-    init() {
-        diePool = DiePool()
-        currentScore = CurrentScore()
-        diceWithStepsOnBoard = []
-        currentDrawnDice = []
-        currentDrawnDiceSides = []
+    init(player: Player) {
+        self.player = player
+        self.diePool = DiePool()
+        self.currentScore = CurrentScore()
+        self.diceWithStepsOnBoard = []
+        self.currentDrawnDice = []
+        self.currentDrawnDiceSides = []
     }
     
-    mutating func play(player: Player) -> Bool {
+    /* Accepts as an argument the player whose turn it is now.
+       Returns whether the player have won or not. */
+    mutating func play() -> Bool {
         var endOfTurn = false
 
         while (!endOfTurn) {
@@ -32,9 +37,9 @@ struct PlayerTurn {
             playDice()
             printRolledDice()
             
-            if (currentScore.amIShotguned()) {
+            if (currentScore.amIShotgunned()) {
                 currentScore.print()
-                print("\n💥💥💥 YOU ARE SHOTGUNNED! 💥💥💥\n")
+                print("\n💥💥💥 \(player.name) IS SHOTGUNNED! 💥💥💥\n")
                 return false
             } else {
                 var gotAnAnswerFromPlayer = false
@@ -44,18 +49,16 @@ struct PlayerTurn {
                     if let answer = readLine() {
                         if answer == "no" {
                             currentScore.print()
-                            addNewScoreTo(player)
+                            addNewScoreTo()
                             if (player.score >= 13) {
-                                print("\n🏅🏅🏅 \(player.name) is the winner! 🏅🏅🏅\n")
+                                print("\n🏅🏅🏅 \(player.name) IS THE WINNER! 🏅🏅🏅\n")
                                 return true
                             }
                             endOfTurn = true
                         }
-                        
-                        gotAnAnswerFromPlayer = true
-                        
-                        if (answer != "no" && answer != "yes") {
-                            gotAnAnswerFromPlayer = false
+                                                
+                        if (answer == "no" || answer == "yes") {
+                            gotAnAnswerFromPlayer = true
                         }
                     }
                 }
@@ -72,13 +75,13 @@ struct PlayerTurn {
     
     mutating func rollDice() {
         if let dice = diePool.drawDice(howMany: 3 - diceWithStepsOnBoard.count) {
-
             currentDrawnDice = dice + diceWithStepsOnBoard
             currentDrawnDiceSides = currentDrawnDice.map { $0.rollDie() }
         }
     }
     
-    
+    /* A function that puts aside the dice that rolled to steps.
+       They may be rerolled on the next throw of the player if he choses so. */
     mutating private func getStepDice() {
         diceWithStepsOnBoard = []
         for index in 0..<currentDrawnDiceSides.count{
@@ -88,10 +91,12 @@ struct PlayerTurn {
         }
     }
     
-    func addNewScoreTo(_ player: Player) {
+    func addNewScoreTo() {
         player.score += currentScore.brainsScore
     }
     
+    /* For each die side we want to give information about the type of die it is a
+       side of so that the player come up with a strategy how to play from now on.*/
     func printRolledDice() {
         print("Rolled dice: ", terminator: "")
         for index in 0..<currentDrawnDiceSides.count {
@@ -107,4 +112,3 @@ struct PlayerTurn {
         print()
     }
 }
-

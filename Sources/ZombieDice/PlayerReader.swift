@@ -7,6 +7,11 @@
 
 import Foundation
 
+/* This is a struct that contains the logic for reading the information about the
+   players and its verification. It creates a correspoding object for each of them.
+   It is not possible to create a player with an empty name or to have two or more
+   players with the same name. */
+
 struct PlayerReader {
     var players: [Player]
     
@@ -54,7 +59,7 @@ struct PlayerReader {
         var playerName: String = ""
         var readNameReady = false
 
-        while !readNameReady {
+        while (!readNameReady) {
             print("Please enter a name for player #\(number): ", terminator: "")
             if let name = readLine(), !name.isEmpty, !playerAlreadyExists(with: name) {
                 playerName = name

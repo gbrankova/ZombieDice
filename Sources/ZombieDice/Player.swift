@@ -5,6 +5,8 @@
 //  Created by Gabriela Brankova on 9.07.20.
 //
 
+// An abstraction of a virtual player that contains its name and score
+
 class Player {
     var name: String
     var score: Int

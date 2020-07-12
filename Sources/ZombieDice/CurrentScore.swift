@@ -7,6 +7,9 @@
 
 import Foundation
 
+/* An abstraction that encapsulates
+ information about a player's score
+ during his current turn. */
 struct CurrentScore {
     var brainsScore = 0
     var shotgunScore = 0
@@ -21,7 +24,7 @@ struct CurrentScore {
         }
     }
     
-    func amIShotguned() -> Bool {
+    func amIShotgunned() -> Bool {
         return shotgunScore >= 3
     }
     

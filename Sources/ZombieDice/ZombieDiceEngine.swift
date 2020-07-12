@@ -9,7 +9,7 @@ import Foundation
 
 struct ZombieDiceEngine {
     var players: [Player]
-    var whoseTurnIsIt: Int
+    var whoseTurnIsIt: Int  // Keeps track of the player order
     
     init() {
         players = []
@@ -24,7 +24,7 @@ struct ZombieDiceEngine {
         var wantToPlayAgain: Bool
         repeat {
             wantToPlayAgain = false
-            resetScores()
+            resetScoresToPlayers()
             startGame()
             print("Do you want to play Zombie Dice again? (yes/no)")
             if let playAgain = readLine(), playAgain == "yes" {
@@ -33,14 +33,17 @@ struct ZombieDiceEngine {
         } while (wantToPlayAgain)
     }
     
+    /* Statistics about the brain score of the players and who is next
+       is printed out before each turn of a player */
     mutating func startGame() {
+        // the first player is randomly chosed
         whoseTurnIsIt = Int.random(in: 0..<players.count)
         var endGame = false
         
         while (!endGame) {
             printStatictics()
-            var playersTurn = PlayerTurn()
-            let hasWon = playersTurn.play(player: players[whoseTurnIsIt])
+            var playersTurn = PlayerTurn(player: players[whoseTurnIsIt])
+            let hasWon = playersTurn.play()
             
             if (hasWon) {
                 endGame = true
@@ -50,7 +53,7 @@ struct ZombieDiceEngine {
         }
     }
     
-    func resetScores() {
+    func resetScoresToPlayers() {
         for player in players {
             player.resetScore()
         }
