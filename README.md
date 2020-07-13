@@ -20,4 +20,4 @@ The dice are colured in 3 different colours. There are 6 green dice, 4 yellow di
 ## Rules
 The first player grabs 3 dice and rolls them. If he gets brains or shotgun, he puts these dice aside to keep track of the current brains score and the accumulated shotguns. If a player gets 3 shotguns during his turn, he loses all of the brains he has eaten and does not score anything from this turn. After a player rolls and he doesn't end being shot, he may choose to roll again and possibly score more brains. He gets the dice that rolled to steps in the previous roll and draws more dice from the die pool to add up to 3. But if he chooses to pass, the other player in turn takes 3 dice and tries his luck. The first one who gets 13 dice is the one who wins the game !! :trophy:
 
-## Enjoy! :simple_smile:
+## Enjoy! :smile:
