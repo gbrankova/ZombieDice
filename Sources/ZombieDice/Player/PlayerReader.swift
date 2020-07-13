@@ -29,7 +29,7 @@ struct PlayerReader {
         var playerCount: Int = 0
         var playerCountReady: Bool = false
         
-        while !playerCountReady {
+        while (!playerCountReady) {
             print("Please enter the number of players [2-8]: ", terminator: "")
             if let count = readLine() {
                 if (!("2"..."8").contains(count) || count.count != 1) {

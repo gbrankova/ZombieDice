@@ -11,8 +11,8 @@ import Foundation
  information about a player's score
  during his current turn. */
 struct CurrentScore {
-    var brainsScore = 0
-    var shotgunScore = 0
+    var brainsScore: Int = 0
+    var shotgunScore: Int = 0
     
     mutating func updateScores(with diceSides: [DieSide]){
         for side in diceSides {

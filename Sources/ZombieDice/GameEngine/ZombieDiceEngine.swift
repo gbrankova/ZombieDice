@@ -35,8 +35,8 @@ struct ZombieDiceEngine {
     
     /* Statistics about the brain score of the players and who is next
        is printed out before each turn of a player */
-    mutating func startGame() {
-        // the first player is randomly chosed
+    private mutating func startGame() {
+        // the first player is randomly chosed to be fair
         whoseTurnIsIt = Int.random(in: 0..<players.count)
         var endGame = false
         
@@ -53,13 +53,13 @@ struct ZombieDiceEngine {
         }
     }
     
-    func resetScoresToPlayers() {
+    private func resetScoresToPlayers() {
         for player in players {
             player.resetScore()
         }
     }
     
-    func printStatictics() {
+    private func printStatictics() {
         print("\n\n\n")
         print("--------- Statistics: --------")
         print("==============================")

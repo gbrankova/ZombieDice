@@ -27,8 +27,9 @@ struct PlayerTurn {
         self.currentDrawnDiceSides = []
     }
     
-    /* Accepts as an argument the player whose turn it is now.
-       Returns whether the player have won or not. */
+    /* Prompts the player to make a turn and gives information after
+       each roll of dice about the currrent score. Returns whether the player
+       have won or not. */
     mutating func play() -> Bool {
         var endOfTurn = false
 
@@ -49,7 +50,7 @@ struct PlayerTurn {
                     if let answer = readLine() {
                         if answer == "no" {
                             currentScore.print()
-                            addNewScoreTo()
+                            addNewScoreToPlayer()
                             if (player.score >= 13) {
                                 print("\n🏅🏅🏅 \(player.name) IS THE WINNER! 🏅🏅🏅\n")
                                 return true
@@ -67,13 +68,15 @@ struct PlayerTurn {
         return false
     }
     
-    mutating func playDice() {
+    /* A function that rolls dices, calculates the new score and puts aside the dice
+       that have rolled to steps. */
+    private mutating func playDice() {
         rollDice()
         currentScore.updateScores(with: currentDrawnDiceSides)
         getStepDice()
     }
     
-    mutating func rollDice() {
+    private mutating func rollDice() {
         if let dice = diePool.drawDice(howMany: 3 - diceWithStepsOnBoard.count) {
             currentDrawnDice = dice + diceWithStepsOnBoard
             currentDrawnDiceSides = currentDrawnDice.map { $0.rollDie() }
@@ -82,7 +85,7 @@ struct PlayerTurn {
     
     /* A function that puts aside the dice that rolled to steps.
        They may be rerolled on the next throw of the player if he choses so. */
-    mutating private func getStepDice() {
+    private mutating func getStepDice() {
         diceWithStepsOnBoard = []
         for index in 0..<currentDrawnDiceSides.count{
             if (currentDrawnDiceSides[index] == DieSide.Steps){
@@ -91,13 +94,14 @@ struct PlayerTurn {
         }
     }
     
-    func addNewScoreTo() {
+    private func addNewScoreToPlayer() {
         player.score += currentScore.brainsScore
     }
     
-    /* For each die side we want to give information about the type of die it is a
+    /* Prints the rolled die sides.
+       For each die side we want to give information about the type of die it is a
        side of so that the player come up with a strategy how to play from now on.*/
-    func printRolledDice() {
+    private func printRolledDice() {
         print("Rolled dice: ", terminator: "")
         for index in 0..<currentDrawnDiceSides.count {
             switch currentDrawnDice[index] {
