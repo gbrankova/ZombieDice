@@ -1,5 +1,5 @@
 # How To Play Zombie Dice
-### *A quick concole game.*
+### *A quick console game.*
 
 
 ## Overview
