@@ -10,8 +10,8 @@ The first player who gets 13 brains is the winner!
 ## Dice
 You need 13 dice to play the game. The dice have 6 sides with pictures on them. The pictures can be: 
 * *Brains* 🧠 - A player should get as many as he can of these.
-* *Footsteps* 👣 - A player should avoid them. If he gets 3 of these in a single turn, he will lose all of the brains he ate in this turn.
-* *Shotguns* 💥 - A player can roll this die again.
+* *Shotgun* 💥 - A player should avoid them. If he gets 3 of these in a single turn, he will lose all of the brains he ate in this turn.
+* *Footsteps* 👣 - A player can roll this die again.
 
 The dice are colured in 3 different colours. There are 6 green dice, 4 yellow dice and 3 red dice.
 1. *Green dice* - They are the most favourable because there are less shotgun symbols on them.
